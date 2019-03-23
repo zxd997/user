@@ -1,0 +1,42 @@
+spring:
+  application:
+    name: user
+  #  datasource:
+  #    driver-class-name: com.mysql.cj.jdbc.Driver
+  #    username: root
+  #    password: root
+  #    url: jdbc:mysql://localhost:3306/cloud1?serverTimezone=GMT%2B8&characterEncoding=utf-8&useSSL=false
+  #  jpa:
+  #    show-sql: true
+  #配置中心的方式(拉取 服务配置 注意 应用的name必须写在当前配置文件中) 如果config服务启动多个端口 那么order应用 拉取配置是实现了负载均衡的（随机）
+
+  cloud:
+    config:
+      discovery:
+        enabled: true
+        service-id: CONFIG
+      profile: dev
+      label: release
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+  #server:
+  #  port: 8081
+  #logging:
+  #  level:
+  #    root: info
+  #    com.cloud: debug
+  #  file: logs/${spring.application.name}.log
+
+  #负载均衡的策略 默认轮询 对RestTemplate的 如果是Feign还是默认轮询
+  #PRODUCT:
+  #  ribbon:
+  #    NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RandomRule
+  ######
+  #ribbon:
+  #  eureka:
+  #    enabled: true
+
+
+
